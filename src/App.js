@@ -64,7 +64,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='App'>
         <Information
           info={this.state.info}
           inEditMode={this.state.inEditMode}
@@ -73,7 +73,7 @@ class App extends Component {
         />
         <Educational />
         <Practical />
-        <button onClick={this.toggleChangeEditMode}>edit</button>
+        <button className='edit-btn' onClick={this.toggleChangeEditMode}>EDIT</button>
       </div>
     );
   }

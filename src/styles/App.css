@@ -1,42 +1,73 @@
+:root {
+  --palette-color-1: #D7E9B9;
+  --palette-color-2: #FFFBAC;
+  --palette-color-3: #FFD495;
+  --palette-color-4: #FAAB78;
+}
+
+html {
+  background-color: var(--palette-color-1);
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+} 
+
 .App {
-  text-align: center;
+  margin: 50px;
+  height: 800px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 30px;
+  padding: 20px;
+  background-color: var(--palette-color-3);
+  border-radius: 20px;
+  border: 3px solid white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.edit-btn {
+  width: 70px;
+  height: 30px;
+  border-radius: 10px;
+  border: 3px solid white;
   color: white;
+  background-color: var(--palette-color-3);
+  font-weight: 600;
+  font-size: 1.2em;
+  justify-self: end;
 }
 
-.App-link {
-  color: #61dafb;
+button {
+  idth: 70px;
+  height: 30px;
+  border-radius: 10px;
+  border: 3px solid white;
+  color: white;
+  background-color: var(--palette-color-3);
+  font-weight: 600;
+  font-size: 1.2em;
+  justify-self: end;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.edit-btn:hover {
+  background-color: var(--palette-color-4);
+  cursor: pointer;
 }
 
 ul {
   list-style: none;
+}
+
+li {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+li > div {
+  display: grid;
+  grid-template-columns: 300px 50px;
 }
