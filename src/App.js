@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/App.css';
 import Educational from './components/Educational';
 import Information from './components/Information';
 import Practical from './components/Practical';
@@ -8,25 +9,34 @@ class App extends Component {
     super(props);
 
     this.state = {
+      inEditMode: false,
       info: {
-        firstName: { data: '', name: 'First Name'},
-        lastName: { data: '', name: 'Last Name'},
-        birthday: { data: '', name: 'Birthday'},
-        city: { data: '', name: 'City'},
-        Country: { data: '', name: 'Country'},
-        email: { data: '', name: 'E-Mail'},
-        phone: { data: '', name: 'Phone Number'},
-        website: { data: '', name: 'Website'},
+        city: { data: '', name: 'City' },
+        country: { data: 'Germany', name: 'Country' },
+        email: { data: '', name: 'E-Mail' },
+        website: { data: '', name: 'Website' },
       },
     };
+
+    this.onChangeEditMode = this.onChangeEditMode.bind(this);
+  }
+
+  onChangeEditMode() {
+    this.setState ({
+      inEditMode: !this.state.inEditMode
+    })
   }
 
   render() {
     return (
       <div>
-        <Information info={this.state.info}/>
+        <Information
+          info={this.state.info}
+          inEditMode={this.state.inEditMode}
+        />
         <Educational />
         <Practical />
+        <button onClick={this.onChangeEditMode}>edit</button>
       </div>
     );
   }
