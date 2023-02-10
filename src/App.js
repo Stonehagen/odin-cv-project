@@ -10,6 +10,7 @@ class App extends Component {
 
     this.state = {
       inEditMode: false,
+      inEditDataMode: null,
       info: {
         city: { data: '', name: 'City' },
         country: { data: 'Germany', name: 'Country' },
@@ -18,13 +19,47 @@ class App extends Component {
       },
     };
 
-    this.onChangeEditMode = this.onChangeEditMode.bind(this);
+    this.toggleChangeEditMode = this.toggleChangeEditMode.bind(this);
+    this.onEditDataMode = {
+      on: this.onEditDataMode.bind(this),
+      off: this.offEditDataMode.bind(this),
+      get: this.getEditDataMode.bind(this),
+    };
+    this.changeInfos = this.changeInfos.bind(this);
   }
 
-  onChangeEditMode() {
-    this.setState ({
-      inEditMode: !this.state.inEditMode
-    })
+  toggleChangeEditMode() {
+    if (this.state.inEditDataMode !== null) {
+      return;
+    } else {
+      this.setState({
+        inEditMode: !this.state.inEditMode,
+      });
+    }
+  }
+
+  onEditDataMode(dataField) {
+    this.setState({
+      inEditDataMode: dataField,
+    });
+  }
+
+  offEditDataMode() {
+    this.setState({
+      inEditDataMode: null,
+    });
+  }
+
+  getEditDataMode() {
+    return this.state.inEditDataMode;
+  }
+
+  changeInfos(fieldName, value) {
+    const newInfo = { ...this.state.info };
+    newInfo[fieldName]['data'] = value;
+    this.setState({
+      info: newInfo,
+    });
   }
 
   render() {
@@ -33,10 +68,12 @@ class App extends Component {
         <Information
           info={this.state.info}
           inEditMode={this.state.inEditMode}
+          editDataMode={this.onEditDataMode}
+          changeInfos={this.changeInfos}
         />
         <Educational />
         <Practical />
-        <button onClick={this.onChangeEditMode}>edit</button>
+        <button onClick={this.toggleChangeEditMode}>edit</button>
       </div>
     );
   }
