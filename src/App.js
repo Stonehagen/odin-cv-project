@@ -1,82 +1,66 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './styles/App.css';
 import Educational from './components/Educational';
 import Information from './components/Information';
 import Practical from './components/Practical';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [inEditMode, setInEditMode] = useState('false');
+  const [inEditDataMode, setInEditDataMode] = useState(null);
+  const [info, setInfo] = useState({
+    city: { data: '', name: 'City' },
+    country: { data: 'Germany', name: 'Country' },
+    email: { data: '', name: 'E-Mail' },
+    website: { data: '', name: 'Website' },
+  });
 
-    this.state = {
-      inEditMode: false,
-      inEditDataMode: null,
-      info: {
-        city: { data: '', name: 'City' },
-        country: { data: 'Germany', name: 'Country' },
-        email: { data: '', name: 'E-Mail' },
-        website: { data: '', name: 'Website' },
-      },
-    };
-
-    this.toggleChangeEditMode = this.toggleChangeEditMode.bind(this);
-    this.onEditDataMode = {
-      on: this.onEditDataMode.bind(this),
-      off: this.offEditDataMode.bind(this),
-      get: this.getEditDataMode.bind(this),
-    };
-    this.changeInfos = this.changeInfos.bind(this);
-  }
-
-  toggleChangeEditMode() {
-    if (this.state.inEditDataMode !== null) {
+  const toggleChangeEditMode = () => {
+    if (inEditDataMode !== null) {
       return;
     } else {
-      this.setState({
-        inEditMode: !this.state.inEditMode,
-      });
+      setInEditMode(!inEditMode);
     }
-  }
+  };
 
-  onEditDataMode(dataField) {
-    this.setState({
-      inEditDataMode: dataField,
-    });
-  }
+  const onEditDataMode = (dataField) => {
+    setInEditDataMode(dataField);
+  };
 
-  offEditDataMode() {
-    this.setState({
-      inEditDataMode: null,
-    });
-  }
+  const offEditDataMode = () => {
+    setInEditDataMode(null);
+  };
 
-  getEditDataMode() {
-    return this.state.inEditDataMode;
-  }
+  const getEditDataMode = () => {
+    return inEditDataMode;
+  };
 
-  changeInfos(fieldName, value) {
-    const newInfo = { ...this.state.info };
-    newInfo[fieldName]['data'] = value;
-    this.setState({
-      info: newInfo,
-    });
-  }
+  const editDataMode = {
+    on: onEditDataMode,
+    off: offEditDataMode,
+    get: getEditDataMode,
+  };
 
-  render() {
-    return (
-      <div className='App'>
-        <Information
-          info={this.state.info}
-          inEditMode={this.state.inEditMode}
-          editDataMode={this.onEditDataMode}
-          changeInfos={this.changeInfos}
-        />
-        <Educational />
-        <Practical />
-        <button className='edit-btn' onClick={this.toggleChangeEditMode}>EDIT</button>
-      </div>
-    );
-  }
-}
+  const changeInfos = (fieldName, value) => {
+    const updateInfo = {...info};
+    updateInfo[fieldName].data = value;
+    setInfo(updateInfo);
+  };
+
+  return (
+    <div className="App">
+      <Information
+        info={info}
+        inEditMode={inEditMode}
+        editDataMode={editDataMode}
+        changeInfos={changeInfos}
+      />
+      <Educational />
+      <Practical />
+      <button className="edit-btn" onClick={toggleChangeEditMode}>
+        EDIT
+      </button>
+    </div>
+  );
+};
 
 export default App;
