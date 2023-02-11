@@ -42,14 +42,12 @@ body {
 }
 
 button {
-  idth: 70px;
-  height: 30px;
+  width: 40px;
+  height: 22px;
   border-radius: 10px;
-  border: 3px solid white;
+  border: 1px solid white;
   color: white;
   background-color: var(--palette-color-3);
-  font-weight: 600;
-  font-size: 1.2em;
   justify-self: end;
 }
 
@@ -63,8 +61,22 @@ ul {
 }
 
 li {
+  height: 30px;
   display: grid;
   grid-template-columns: 150px 1fr;
+}
+
+.data-change {
+  height: 30px;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+}
+
+.data-change input {
+  height: 20px;
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: var(--palette-color-3);
 }
 
 li > div {

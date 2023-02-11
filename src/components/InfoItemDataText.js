@@ -10,13 +10,15 @@ class InfoItemDataText extends Component {
     let newValue = '';
 
     const onSave = () => {
-      changeInfos(itemKey, newValue);
+      if (newValue !== '') {
+        changeInfos(itemKey, newValue);
+      }
       editDataMode.off();
     };
 
     if (editDataMode.get() === itemName) {
       return (
-        <form>
+        <div className='data-change'>
           <input
             defaultValue={itemData}
             onChange={(v) => {
@@ -24,10 +26,15 @@ class InfoItemDataText extends Component {
             }}
           ></input>
           <button onClick={onSave}>save</button>
-        </form>
+        </div>
       );
     } else {
-      return itemData;
+      return (
+        <div>
+          {itemData}
+          <div></div>
+        </div>
+      );
     }
   }
 }
